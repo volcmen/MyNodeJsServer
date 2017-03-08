@@ -1,0 +1,5 @@
+{
+  "port": 666,
+  "secret": "tyhrg54gtr5gdsf34",
+  "db": "mongodb://localhost/MyDb-test"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "dependencies": {
+    "mongoose": "latest",
+    "express": "latest",
+    "body-parser": "latest",
+    "morgan": "latest",
+    "jsonwebtoken": "latest",
+    "serve-favicon": "latest"
+  }
+}
