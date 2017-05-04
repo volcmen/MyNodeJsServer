@@ -1,0 +1,57 @@
+<a href="/" class="btn btn-default" style="margin-left: 200px"><span class="fa fa-home"></span> Home</a>
+
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> {{user.profile.name}} Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                <p>
+                    <strong>Mongo id</strong>: {{user._id}}<br>
+                    <strong>email</strong>: {{user.email}}<br>
+                    <strong>token</strong>: {{user.token}}<br>
+                    <strong>Role</strong>: {{user.role}}<br>
+                    <strong>Created</strong>: {{user.created}}<br>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="well">
+            <h4>Profile</h4>
+            <p>
+                <strong>Login</strong>: {{user.login}}<br>
+                <strong>ID</strong>: {{user.profile.id}}<br>
+                <strong>Name</strong>: {{user.profile.name}}<br>
+                <strong>Surname</strong>: {{user.profile.sureName}}<br>
+                <strong>Segment</strong>: {{user.profile.segment}}<br>
+                <strong>Gender</strong>: {{user.profile.gender}}<br>
+                <strong>Birth Date</strong>: {{user.profile.birthDate | date}}<br>
+                <strong>Phone Number</strong>: {{user.profile.phoneNum}}<br>
+                <strong>personalInfo</strong>: {{user.profile.personalInfo}}<br>
+                <strong>Gym</strong>: {{user.profile.gym}}<br>
+                <strong>Photo</strong>
+                <img ng-src="/images/users/{{user.profile.photo}}" alt="" style="height: 150px;width: 150px;border-radius: 50%"><br>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="well">
+        <h5>Clients  {{clients.length}}</h5>
+        <p ng-repeat="client in clients">
+            Email: {{client.email}}
+        </p>
+    </div>
+
+    <a href="/profile/profileEdit" class="btn btn-default btn-sm" >Edit Profile</a>
+</div>

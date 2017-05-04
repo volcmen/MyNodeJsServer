@@ -1,0 +1,90 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>Edit My Profile</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1><span class="fa fa-address-card-o"></span> <%= user.profile.name%> Profile Page Edit</h1>
+		<!--<a href="/logout" class="btn btn-default btn-sm">Logout</a>-->
+	</div>
+
+	<form enctype="multipart/form-data" action="/profile/profileEdit" method="post">
+	<div class="form-groupd">
+
+		<!-- LOCAL INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Local</h3>
+
+					<p>
+						<strong>Mongo id</strong>: <%= user._id %><br>
+						<strong>email</strong>: <%= user.email %><br>
+						<strong>token</strong>: <%= user.token %><br>
+						<strong>Role</strong>: <%= user.role %>
+						<select name="sel">
+							<option>Super Admin</option>
+							<option>Admin</option>
+							<option>Director</option>
+							<option>Marketing</option>
+							<option>Tech Support</option>
+							<option>Coach</option>
+						</select><br>
+						<strong>Created</strong>: <%= user.created %><br>
+					</p>
+			</div>
+		</div>
+
+		<div class="well">
+			<h4>Profile</h4>
+			<p>
+				<strong>Login</strong>: <%= user.login %>
+				<input type="text" name="changeLogin"><br>
+				<strong>ID</strong>: <%= user.profile.id %>
+				<input type="number" name="changeID"><br>
+				<strong>Name</strong>: <%= user.profile.name %>
+				<input type="text" name="changeName"><br>
+				<strong>Surname</strong>: <%= user.profile.sureName %>
+				<input type="text" name="changeSureName"><br>
+				<strong>Segment</strong>: <%= user.profile.segment %>
+				<input type="text" name="changeSegment"><br>
+				<strong>Gender</strong>: <%= user.profile.gender %>
+				<select name="changeGender" >
+					<option selected disabled></option>
+					<option>Female</option>
+					<option>Male</option>
+					<option>Custom</option>
+				</select><br>
+				<strong>Birth Date</strong>: <%= user.profile.birthDate %>
+				<input type="date" name="changeBDay"><br>
+				<strong>personalInfo</strong>: <%= user.profile.phoneNum %>
+				<input type="number" name="changePNum"><br>
+				<strong>personalInfo</strong>: <%= user.profile.personalInfo %>
+				<input type="text" name="changePInfo"><br>
+				<strong>Gym</strong>: <%= user.profile.gym %>
+				<input type="text" name="changeGym"><br>
+				<strong>Photo</strong>: <%= user.profile.photo %>
+				<input type="file" name="changePhoto" accept="image/*"><br>
+
+			</p>
+		</div>
+
+	</div>
+	<button type="submit" class="btn btn-primary btn-lg">Save</button>
+		<a href="/profile/" class="btn btn-danger">Cancel</a>
+
+
+	</form>
+</div>
+
+
+</body>
+</html>

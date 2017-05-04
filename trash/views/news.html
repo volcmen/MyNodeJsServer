@@ -1,0 +1,28 @@
+<a href="/" class="btn btn-default" style="margin-left: 200px"><span class="fa fa-home"></span> Home</a>
+<a ng-controller="LoggedController" ng-show="logged.role==='Super Admin'" href="/news/addNews" class="btn btn-default" style="margin-left: 200px"><span class="fa fa-bug"></span> Add News</a>
+
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-newspaper-o"></span>News</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-6" ng-controller="NewsController">
+            <p ng-repeat="newws in news">
+                <span> News Id: {{newws.newsId}}</span>
+                <span> Title: {{newws.Title}}</span>
+                <span> Description: {{newws.Description}} </span> <br>
+                <span> Photo: </span>
+                <img ng-src="/images/news/{{newws.Photo}}" alt="" style="height: 150px;width: 150px;border-radius: 50%"><br>
+                <span> Video: </span>
+                <video width="360" controls>
+                    <source ng-src="/images/news/{{newws.Video}}">
+                </video>
+            </p>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Add News</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body 		{ padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-newspaper-o"></span> Edit news</h1>
+    </div>
+
+    <form enctype="multipart/form-data" action="/news/addNews" method="post">
+        <div class="form-groupd">
+
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-coffee"></span> New news</h3>
+
+                    <p>
+                        <strong>News id</strong>:
+                        <input type="text" name="changeId"><br>
+                        <strong>Title</strong>:
+                        <input type="text" name="changeTitle"><br>
+                        <strong>Status</strong>:
+                        <input type="text" name="changeStatus"><br>
+                        <strong>Status ico</strong>:
+                        <input type="text" name="changeStatusIco"><br>
+                        <strong>DateOfPubl</strong>:
+                        <input type="text" name="changeDateOfPubl"><br>
+                        <strong>Description</strong>:
+                        <input type="text" name="changeDescription"><br>
+                        <strong>Photo</strong>:
+                        <input type="file" name="changePhoto" accept="image/*"><br>
+                        <strong>Video</strong>:
+                        <input type="file" name="changeVideo" accept="video/*"><br>
+                        <strong>Gym</strong>:
+                        <input type="text" name="changeGym"><br>
+
+                    </p>
+                </div>
+            </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        <a href="/news/" class="btn btn-danger">Cancel</a>
+
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
