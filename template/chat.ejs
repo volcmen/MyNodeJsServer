@@ -11,10 +11,10 @@
 </div>
 
 <script>
-    var input = $('#room input');
-    var ul = $('#room ul');
-    var form = $('#room form');
-    var socket = io.connect('', {
+    const input = $('#room input');
+    const ul = $('#room ul');
+    const form = $('#room form');
+    const socket = io.connect('', {
         reconnect: false
     });
     socket
@@ -42,7 +42,7 @@
             location.href = "/";
         })
         .on('error', function(reason) {
-            if (reason == "handshake unauthorized") {
+            if (reason === "handshake unauthorized") {
                 printStatus("вы вышли из сайта");
             } else {
                 setTimeout(function() {
@@ -51,7 +51,7 @@
             }
         });
     function sendMessage() {
-        var text = input.val();
+        const text = input.val();
         socket.emit('message', text, function() {
             printMessage("я> " + text);
         });

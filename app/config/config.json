@@ -1,7 +1,7 @@
 {
   "port": 1234,
   "secret": "tyhrg54gtr5gdsf34",
-  "db": "mongodb://",  //here's mongodb
+  "db": "mongodb://localhost:27017",
   "image": {
     "path": "__dirname/trash/images",
     "type": "image/png"

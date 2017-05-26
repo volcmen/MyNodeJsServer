@@ -1,15 +1,16 @@
-var express = require('express');
-var routerGym = express.Router();
-var gyms = require('../controller/controlGym');
+const express = require('express');
+const routerGym = express.Router();
+const gyms = require('../controller/controlGym');
 
 
-var multer  = require('multer');
-var storage = multer.diskStorage({
+const multer = require('multer');
+const storage = multer.diskStorage({
         destination: function (req, file, callback) {
             callback(null, './trash/images/gyms')
         }, filename: function (req, file, callback) {
-            callback(null,Date.now()+'-'+file.originalname);
-        }}),
+            callback(null, Date.now() + '-' + file.originalname);
+        }
+    }),
     upload = multer({storage: storage}).single('photo');
 
 

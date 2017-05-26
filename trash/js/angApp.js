@@ -1,1 +1,1 @@
-var app = angular.module('appModule', []);
+const app = angular.module('appModule', []);

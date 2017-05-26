@@ -1,5 +1,5 @@
-var Gym = require('../models/gym'),
-gymfuncts = Gym();
+const Gym = require('../models/gym'),
+    gymfuncts = Gym();
 
 module.exports = {};
 
@@ -21,7 +21,7 @@ module.exports.createGym = function (req, res) {
         if (err) throw err;
         if (gyms) return res.status(400).end("There is already gym with id: " + gyms.id);
         else {
-            var newGym = new Gym();
+            let newGym = new Gym();
             newGym.id = req.body.id;
             newGym.address = req.body.address ? req.body.address : newGym.address;
             if (req.file) newGym.photo = req.file.filename ? req.file.filename : newGym.photo;

@@ -1,14 +1,15 @@
-var express = require('express');
-var routerUser = express.Router();
-var user = require('../controller/controlUsers');
+const express = require('express');
+const routerUser = express.Router();
+const user = require('../controller/controlUsers');
 
-var multer  = require('multer');
-var storage = multer.diskStorage({
+const multer = require('multer');
+const storage = multer.diskStorage({
         destination: function (req, file, callback) {
             callback(null, './trash/images/users')
         }, filename: function (req, file, callback) {
-            callback(null,req.user._id + '-' + Date.now()+'-'+file.originalname);
-        }}),
+            callback(null, req.user._id + '-' + Date.now() + '-' + file.originalname);
+        }
+    }),
     upload = multer({storage: storage}).single('photo');
 
 

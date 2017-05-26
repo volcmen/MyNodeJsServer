@@ -28,7 +28,7 @@
 
 <script>
     $(document.forms['login-form']).on('submit', function() {
-        var form = $(this);
+        const form = $(this);
         $('.error', form).html('');
         $(":submit", form).button("loading");
         $.ajax({
@@ -44,7 +44,7 @@
                     window.location.href = "/chat";
                 },
                 403: function(jqXHR) {
-                    var error = JSON.parse(jqXHR.responseText);
+                    const error = JSON.parse(jqXHR.responseText);
                     $('.error', form).html(error.message);
                 }
             }

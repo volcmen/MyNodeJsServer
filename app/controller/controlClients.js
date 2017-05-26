@@ -1,6 +1,6 @@
-var Client = require('../models/client'),
+const Client = require('../models/client'),
     clientPass = Client();
-var passport = require('../config/passport');
+const passport = require('../config/passport');
 
 
 
@@ -13,7 +13,7 @@ module.exports.l0g1nCl13nt = function (req, res, next) {
     Client.findOne({email: req.body.email.toLowerCase()}, function (err, user) {
         if (err) throw err;
         if (!user) return res.status(404).end("Invalid client");
-        var pass = user.password,
+        const pass = user.password,
             enteredPass = clientPass.encryptPassword(req.body.password);
         if (pass !== enteredPass) return res.status(401).end("Wrong pass");
         else {
@@ -32,7 +32,7 @@ module.exports.cr34t3Cl13nt = function (req, res) {
         if (err) throw(err);
         if (user) return res.status(400).end("Client already exists");
         else {
-            var newClient = new Client();
+            let newClient = new Client();
             newClient.email = req.body.email.toLowerCase();
             newClient.password = newClient.encryptPassword(req.body.password);
             newClient.token = newClient.generateJwt();

@@ -1,17 +1,17 @@
-var log = require('lib/log')(module);
-var config = require('/app/config');
-var connect = require('connect'); // npm i connect
-var async = require('async');
-var cookie = require('cookie');   // npm i cookie
-var sessionStore = require('lib/sessionStore');
-var HttpError = require('/app/error').HttpError;
-var User = require('models/user').User;
+const log = require('lib/log')(module);
+const config = require('/app/config');
+const connect = require('connect'); // npm i connect
+const async = require('async');
+const cookie = require('cookie');   // npm i cookie
+const sessionStore = require('lib/sessionStore');
+const HttpError = require('/app/error').HttpError;
+const User = require('models/user').User;
 
 function loadSession(sid, callback) {
 
     // sessionStore callback is not quite async-style!
     sessionStore.load(sid, function(err, session) {
-        if (arguments.length == 0) {
+        if (arguments.length === 0) {
             // no arguments => no session
             return callback(null, null);
         } else {
@@ -43,7 +43,7 @@ function loadUser(session, callback) {
 }
 
 module.exports = function(server) {
-    var io = require('socket.io').listen(server);
+    const io = require('socket.io').listen(server);
     io.set('origins', 'localhost:*');
     io.set('logger', log);
 
@@ -52,8 +52,8 @@ module.exports = function(server) {
             function(callback) {
                 // сделать handshakeData.cookies - объектом с cookie
                 handshake.cookies = cookie.parse(handshake.headers.cookie || '');
-                var sidCookie = handshake.cookies[config.get('session:key')];
-                var sid = connect.utils.parseSignedCookie(sidCookie, config.get('session:secret'));
+                const sidCookie = handshake.cookies[config.get('session:key')];
+                const sid = connect.utils.parseSignedCookie(sidCookie, config.get('session:secret'));
 
                 loadSession(sid, callback);
             },
@@ -90,10 +90,10 @@ module.exports = function(server) {
     });
 
     io.sockets.on('session:reload', function(sid) {
-        var clients = io.sockets.clients();
+        const clients = io.sockets.clients();
 
         clients.forEach(function(client) {
-            if (client.handshake.session.id != sid) return;
+            if (client.handshake.session.id !== sid) return;
 
             loadSession(sid, function(err, session) {
                 if (err) {
@@ -117,7 +117,7 @@ module.exports = function(server) {
 
     io.sockets.on('connection', function(socket) {
 
-        var username = socket.handshake.user.get('username');
+        const username = socket.handshake.user.get('username');
 
         socket.broadcast.emit('join', username);
 

@@ -1,14 +1,14 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 // var mongoose = require('mongoose');
-var User = require("../models/user");
+const User = require("../models/user");
 // var Client = require("../models/client");
-var utilities = require('../models/utilites');
-var configAuth = require('./auth');
+const utilities = require('../models/utilites');
+const configAuth = require('./auth');
 
-var errHandler = utilities.errHandler;
+const errHandler = utilities.errHandler;
 
 
 
@@ -47,7 +47,7 @@ passport.use('local-signup', new LocalStrategy({
                     return done(null, false, {errMsg: 'email already exists'});
                 }
                 else {
-                    var newUser = new User();
+                    const newUser = new User();
                     // newUser.username = req.body.username;
                     newUser.email = email.toLowerCase();
                     newUser.password = newUser.encryptPassword(password);
@@ -109,7 +109,7 @@ passport.use(new GoogleStrategy({
                 if (err) return errHandler(err);
                 if (user) return done(null, user);
                 else {
-                    var newUser = new User();
+                    const newUser = new User();
                     newUser.google.id = profile.id;
                     newUser.google.token = token;
                     newUser.google.name = profile.displayName;
@@ -136,7 +136,7 @@ passport.use(new FacebookStrategy({
             if (err) return errHandler(err);
             if (user) return done(null, user);
             else {
-                var newUser = new User();
+                const newUser = new User();
                 newUser.facebook.id    = profile.id;
                 newUser.facebook.token = token;
                 newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;

@@ -1,4 +1,4 @@
-var UserModel = require('../models/user'),
+const UserModel = require('../models/user'),
     userPass = UserModel();
 
 module.exports = {};
@@ -12,7 +12,7 @@ module.exports.cr34t3Us3r = function (req, res) {
         if (err) throw(err);
         if (user) return res.status(400).end("Employee already exists");
         else {
-            var newUser = new UserModel();
+            let newUser = new UserModel();
             newUser.email = req.body.email.toLowerCase();
             newUser.password = newUser.encryptPassword(req.body.password);
             newUser.token = newUser.generateJwt();
@@ -49,7 +49,7 @@ module.exports.l0g1nUs3r = function (req, res, next) {
     UserModel.findOne({email: req.body.email.toLowerCase()}, function (err, user) {
         if (err) throw err;
         if (!user) return res.status(404).end("Invalid employee");
-        var pass = user.password,
+        const pass = user.password,
             enteredPass = userPass.encryptPassword(req.body.password);
         if (pass !== enteredPass) return res.status(401).end("Wrong pass");
         else {

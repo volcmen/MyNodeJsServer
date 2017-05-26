@@ -1,42 +1,41 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
-  "engines": {
-    "npm": "4.4.4",
-    "node": "7.8.0"
-  },
-  "dependencies": {
-    "mongoose": "latest",
-    "express": "latest",
-    "body-parser": "latest",
-    "morgan": "latest",
-    "jsonwebtoken": "latest",
-    "serve-favicon": "latest",
-    "passport": "latest",
-    "async": "latest",
-    "nconf": "latest",
-    "winston": "latest",
-    "connect-mongo": "latest",
-    "cookie": "latest",
-    "connect": "latest",
-    "ejs": "latest",
-    "passport-http": "latest",
-    "passport-local": "latest",
-    "express-session": "latest",
-    "passport-google-oauth": "latest",
-    "nodemailer": "latest",
-    "multer": "latest",
-    "date-format": "latest",
-    "moment": "latest",
-    "compression": "latest"
-  },
+  "name": "my_node_server",
+  "version": "1.0.0",
+  "description": "add you mongodb in app/config/config.json",
+  "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "main": "server.js",
-  "devDependencies": {},
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volcmen/MyNodeJsServer.git"
+  },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "bugs": {
+    "url": "https://github.com/volcmen/MyNodeJsServer/issues"
+  },
+  "homepage": "https://github.com/volcmen/MyNodeJsServer#readme",
+  "dependencies": {
+    "async": "latest",
+    "body-parser": "latest",
+    "connect-mongo": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "jsonwebtoken": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "multer": "latest",
+    "nconf": "latest",
+    "nodemailer": "latest",
+    "passport": "latest",
+    "passport-facebook": "latest",
+    "passport-google-oauth": "latest",
+    "passport-http": "latest",
+    "passport-local": "latest",
+    "serve-favicon": "latest",
+    "winston": "latest"
+  }
 }

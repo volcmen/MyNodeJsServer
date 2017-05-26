@@ -1,29 +1,31 @@
-var express = require('express');
-var session = require('express-session');
-var favicon = require('serve-favicon');
-var app = express();
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var mongoose = require('mongoose');
+const express = require('express');
+const session = require('express-session');
+const favicon = require('serve-favicon');
+const app = express();
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
 mongoose.Promise = Promise;
-var path = require('path');
-var ejs = require('ejs');
-var passport = require('passport');
+const path = require('path');
+const ejs = require('ejs');
+const passport = require('passport');
 
 
-var router = require('./app/routes/routes');
-var routerClients = require('./app/routes/routesClient');
-var routerUser = require('./app/routes/routesUser');
-var routerNews = require('./app/routes/routesNews');
-var routerGyms = require('./app/routes/routesGym');
+const router = require('./app/routes/routes');
+const routerClients = require('./app/routes/routesClient');
+const routerUser = require('./app/routes/routesUser');
+const routerNews = require('./app/routes/routesNews');
+const routerGyms = require('./app/routes/routesGym');
+const routerPrograms = require('./app/routes/routesPrograms');
+const routerExercises = require('./app/routes/routerExercises');
 
-var http = require('http');
-var fs = require('fs');
+const http = require('http');
+// const fs = require('fs');
 
 
-var config = require("./app/config/config.json");  //get config.json
+const config = require("./app/config/config.json");  //get config.json
 
-var port = process.env.PORT || config.port ||  3000;
+const port = process.env.PORT || config.port ||  3000;
 
 
 mongoose.connect(config.db);
@@ -35,7 +37,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/trash'));
 
-app.use(favicon(path.join(__dirname, 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'trash/favicon.ico')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
@@ -46,11 +48,13 @@ app.use('/client/', routerClients);
 app.use('/employee/', routerUser);
 app.use('/', routerNews);
 app.use('/gym/', routerGyms);
+app.use('/programs/', routerPrograms);
+app.use('/exercises/', routerExercises);
 
 
 
 
-var server = http.createServer(app).listen(port, function () {
+const server = http.createServer(app).listen(port, function () {
     if ('development' === app.get('env')) {
         console.log('Express server listening on port ' + port);
     }

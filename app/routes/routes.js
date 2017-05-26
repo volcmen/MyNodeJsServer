@@ -1,12 +1,12 @@
-var express = require('express');
-var nodemailer = require('nodemailer');
-var async = require('async');
-var User = require('../models/user');
-var Client = require('../models/client');
-var passport = require('../config/passport');
-var utilities = require('../models/utilites');
-var multer  = require('multer');
-var storage = multer.diskStorage({
+const express = require('express');
+const nodemailer = require('nodemailer');
+const async = require('async');
+const User = require('../models/user');
+const Client = require('../models/client');
+const passport = require('../config/passport');
+const utilities = require('../models/utilites');
+const multer  = require('multer');
+const storage = multer.diskStorage({
         destination: function (req, file, callback) {
         callback(null, './trash/images/users')
     }, filename: function (req, file, callback) {
@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
 
 
 
-var router = express.Router();
+const router = express.Router();
 
 
 // Module Variables
@@ -27,8 +27,7 @@ function isLoggedIn(req, res, next) {
     return res.redirect('/login');
 }
 
-var
-    errHandler = utilities.errHandler;
+const errHandler = utilities.errHandler;
 
 
 // Middleware
@@ -145,7 +144,7 @@ router.get('/logout', function (req, res) {
 router.post('/forgot',function(req, res, next){
     async.waterfall([
         function(done) {
-            var token = User.generateJwt;
+            const token = User.generateJwt;
         },
         function(token, done) {
             User.findOne({ email: req.body.email.toLowerCase()}, function(err, user) {
@@ -163,14 +162,14 @@ router.post('/forgot',function(req, res, next){
             });
         },
         function(token, user, done) {
-            var smtpTransport = nodemailer.createTransport('SMTP', {
+            const smtpTransport = nodemailer.createTransport('SMTP', {
                 service: 'Gmail',
                 auth: {
                     user: 'user@gmail.com',
                     pass: 'pass'
                 }
             });
-            var mailOptions = {
+            const mailOptions = {
                 to: user.email,
                 from: 'passwordreset@demo.com',
                 subject: 'Node.js Password Reset',

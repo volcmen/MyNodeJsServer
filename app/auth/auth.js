@@ -1,5 +1,5 @@
-var passport = require('passport');
-var BasicStrategy = require('passport-http').BasicStrategy;
+const passport = require('passport');
+const BasicStrategy = require('passport-http').BasicStrategy;
 // var ClientPasswordStrategy = require('passport-oauth2-client-password').Strategy;
 // var BearerStrategy = require('passport-http-bearer').Strategy;
 
@@ -7,7 +7,7 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 
 // var config = require(libs + 'config');
 
-var User = require('../models/user');
+const User = require('../models/user');
 // var Client = require(libs + 'model/client');
 // var AccessToken = require(libs + 'model/accessToken');
 // var RefreshToken = require(libs + 'model/refreshToken');

@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
-var secret = require('../config/config.json').secret;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const secret = require('../config/config.json').secret;
 
 
-var clientSchema = new Schema({
+const clientSchema = new Schema({
     email: {type: String, unique: true, required: true},
     password: String,
     login: String,
@@ -45,7 +45,7 @@ clientSchema.methods.checkPassword = function(password) {
 };
 
 clientSchema.methods.generateJwt = function() {
-    var expiry = new Date();
+    const expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
 
     return jwt.sign({

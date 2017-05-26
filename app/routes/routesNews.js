@@ -1,18 +1,22 @@
-var express = require('express');
-var News = require('../models/newsFeed');
+const express = require('express');
+const News = require('../models/newsFeed');
 // news = News();
 
-var multer  = require('multer');
-var storage = multer.diskStorage({
+const multer = require('multer');
+const storage = multer.diskStorage({
         destination: function (req, file, callback) {
             callback(null, './trash/images/news')
         }, filename: function (req, file, callback) {
-            callback(null, Date.now()+'-'+file.originalname);
-        }}),
-    upload = multer({storage: storage}).fields([{name: 'changePhoto', maxCount: 1},{name: 'changeVideo', maxCount: 1}]);
+            callback(null, Date.now() + '-' + file.originalname);
+        }
+    }),
+    upload = multer({storage: storage}).fields([{name: 'changePhoto', maxCount: 1}, {
+        name: 'changeVideo',
+        maxCount: 1
+    }]);
 
 
-var routerNews = express.Router();
+const routerNews = express.Router();
 
 
 routerNews.get('/news', function (req, res) {
@@ -34,7 +38,7 @@ routerNews.route('/news/addNews')
             if (err) throw err;
             if (news) return res.status(400).end("News Id already exists");
             console.log('news!!:: ' +  JSON.stringify(news));
-            var newnews = new News();
+            const newnews = new News();
             newnews.newsId = req.body.changeId ? req.body.changeId : newnews.newsId;
             newnews.Title = req.body.changeTitle ? req.body.changeTitle : newnews.Title;
             newnews.newsStatus = req.body.newsStatus ? req.body.newsStatus : newnews.newsStatus;
@@ -68,7 +72,7 @@ routerNews.post('/api/news/addNews', upload, function (req, res, next) {
         News.findOne({newsId: req.body.id}, function (err, news) {
             if (err) throw err;
             if (news) return res.status(400).end("News Id already exists");
-            var newnews = new News();
+            const newnews = new News();
             newnews.newsId = req.body.id ? req.body.id : newnews.newsId;
             newnews.Title = req.body.Title ? req.body.Title : newnews.Title;
             newnews.newsStatus = req.body.newsStatus ? req.body.newsStatus : newnews.newsStatus;
