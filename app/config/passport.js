@@ -79,7 +79,7 @@ passport.use('local-login', new LocalStrategy({
                 return errHandler(err);
             }
             if(!user) {
-                return done(null, false, {errMsg: 'User does not exist, please <a class="errMsg" href="/signup">signup</a>'});
+                return done(null, false, {errMsg: 'User does not exist, please signup'});
             }
             if(!user.checkPassword(password)) {
                 return done(null, false, {errMsg: 'Invalid password try again'});

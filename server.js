@@ -13,7 +13,7 @@ const passport = require('passport');
 
 const router = require('./app/routes/routes');
 const routerClients = require('./app/routes/routesClient');
-const routerUser = require('./app/routes/routesUser');
+// const routerUser = require('./app/routes/routesUser');
 const routerNews = require('./app/routes/routesNews');
 const routerGyms = require('./app/routes/routesGym');
 const routerPrograms = require('./app/routes/routesPrograms');
@@ -43,10 +43,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(session({secret: config.secret, resave: false, saveUninitialized: true, cookie: {maxAge: 1000 * 60 * 15}, httpOnly: true, secure: false }));
 
-app.use('/', router);
+app.use('/employee/', router);
 app.use('/client/', routerClients);
-app.use('/employee/', routerUser);
-app.use('/', routerNews);
+// app.use('/employee/', routerUser);
+app.use('/news/', routerNews);
 app.use('/gym/', routerGyms);
 app.use('/programs/', routerPrograms);
 app.use('/exercises/', routerExercises);

@@ -32,14 +32,16 @@ module.exports.updateProgram = (req, res) =>{
     if (!req.params.id) return res.status(400).end("Invalid input");
     Programs.findOneAndUpdate({programID: req.params.id}, {$set: req.body}, {new: true}, (err, prog)=>{
         if (err) throw err;
+        if (!prog) return res.status(409).send('No such program with programID: ' + req.params.id);
         res.status(200).end('Program updated with programID: ' + prog.programID);
     })
 };
 
 module.exports.deleteProgram = function (req, res) {
-    if (!req.body.programID) return res.status(400).end("Invalid input");
+    if (!req.params.id) return res.status(400).end("Invalid input");
     Programs.findOneAndRemove({programID: req.params.id}, function (err, program) {
         if (err) throw err;
+        if (!program) return res.status(409).send('No such program with programID: ' + req.params.id);
         res.status(200).end('Program deleted with programID: ' + program.programID);
     })
 };

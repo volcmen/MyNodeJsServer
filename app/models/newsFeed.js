@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const userSchema = new Schema({
-    newsId: String,
+    newsId: {type: String, unique: true, required: true},
     newsStatus: String,
     newsStatusIco: String,
     dateOfPubl: String,

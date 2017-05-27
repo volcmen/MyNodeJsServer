@@ -1,7 +1,7 @@
 {
   "port": 1234,
   "secret": "tyhrg54gtr5gdsf34",
-  "db": "mongodb://localhost:27017",
+  "db": "mongodb://fit_add_admin:rjs_ars_34Rd_sc@ds155631.mlab.com:55631/fit_app_db",
   "image": {
     "path": "__dirname/trash/images",
     "type": "image/png"

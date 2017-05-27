@@ -7,8 +7,7 @@ module.exports.getAllExercises = function (req, res) {
     Exercises.find({}, function (err, exercises) {
         if (err) throw err;
         else {
-            res.writeHead(200, {"Content-Type": "application/json"});
-            res.end(JSON.stringify(exercises));
+            res.send(JSON.stringify(exercises));
         }
     })
 };
@@ -20,17 +19,27 @@ module.exports.createExercises = function (req, res) {
         else {
             Exercises.collection.insert(req.body, (err)).then((data)=>{
                 if(err) throw err;
-                res.writeHead(200, {"Content-Type": "application/json"});
-                res.status(201).end(JSON.stringify(data));
+                res.status(201).send(JSON.stringify(data));
             })
         }
     })
 };
 
+module.exports.updateExercise = (req, res) =>{
+    if (!req.params.name) return res.status(400).end("Invalid input");
+    Exercises.findOneAndUpdate({name: req.params.name}, {$set: req.body}, {new: true}, (err, exercise)=>{
+        if (err) throw err;
+        if (!exercise) return res.status(409).send('No such exercise: ' + req.params.name);
+        res.status(200).end('Exercise updated with name: ' + exercise.name);
+    })
+};
+
+
 module.exports.deleteExercise = function (req, res) {
-    if (!req.body.programID) return res.status(400).end("Invalid input");
+    if (!req.params.name || req.params.name===null) return res.status(400).end("Invalid input");
     Exercises.findOneAndRemove({name: req.params.name}, function (err, exercise) {
         if (err) throw err;
-        res.status(200).end('Exercise deleted with name: ' + exercise.name);
+        if (!exercise) return res.status(409).send('No such exercise: ' + req.params.name);
+        res.status(200).send('Exercise deleted with name: ' + exercise.name);
     })
 };
