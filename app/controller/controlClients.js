@@ -72,6 +72,9 @@ module.exports.f1ndBy3m41l = function (req, res) {
 
 module.exports.upd4t3Cl13nt = function (req, res) {
     if (!req.params.email) return res.status(400).end("Invalid input");
+    let newBody = req.body;
+    newBody.password = clientPass.encryptPassword(req.body.password);
+    newBody.token = clientPass.generateJwt();
     Client.findOneAndUpdate({email: req.params.email.toLowerCase()}, {$set: req.body}, {new: true}, (err, client)=>{
         if (err) throw err;
         if (!client) return res.status(409).send('No such client with email: ' + req.params.email.toLowerCase());

@@ -43,7 +43,7 @@ passport.use('local-signup', new LocalStrategy({
                     return errHandler(err);
                 }
                 if(user) {
-                    console.log('user already exists');
+                    console.log('Employee already exists');
                     return done(null, false, {errMsg: 'email already exists'});
                 }
                 else {
@@ -55,7 +55,7 @@ passport.use('local-signup', new LocalStrategy({
                     newUser.save(function(err) {
                         if(err) {
                             console.log(err);
-                            if(err.message === 'User validation failed') {
+                            if(err.message === 'Employee validation failed') {
                                 console.log(err.message);
                                 return done(null, false, {errMsg: 'Please fill all fields'});
                             }
@@ -79,7 +79,7 @@ passport.use('local-login', new LocalStrategy({
                 return errHandler(err);
             }
             if(!user) {
-                return done(null, false, {errMsg: 'User does not exist, please signup'});
+                return done(null, false, {errMsg: 'Employee does not exist, please signup'});
             }
             if(!user.checkPassword(password)) {
                 return done(null, false, {errMsg: 'Invalid password try again'});
@@ -89,7 +89,7 @@ passport.use('local-login', new LocalStrategy({
                 if (err) {
                     return errHandler(err);
                 }
-                console.log('User updated: ', user);
+                console.log('Employee updated: ', user);
             });
             return done(null, user);
         });
