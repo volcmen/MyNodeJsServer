@@ -23,13 +23,13 @@ routerNews.get('/news', function (req, res) {
     News.find({}, function (err, news) {
         if (err) throw err;
         return res.status(200).json(news);
-
     })
 });
 
 
-routerNews.post('/news/addNews', upload, function (req, res, next) {
-        News.findOne({newsId: req.body.newsId}, function (err, news) {
+routerNews.post('/addNews', upload, function (req, res, next) {
+    if (!req.body.newsId) return res.status(400).end("Invalid input");
+    News.findOne({newsId: req.body.newsId}, function (err, news) {
             if (err) throw err;
             if (news) return res.status(409).end("News Id already exists");
             News.collection.insert(req.body, (err)).then((data)=>{
@@ -40,7 +40,7 @@ routerNews.post('/news/addNews', upload, function (req, res, next) {
 });
 
 
-routerNews.post('/news/updateNew/:newsId', upload, function (req, res, next) {
+routerNews.post('/updateNews/:newsId', upload, function (req, res, next) {
     if (!req.params.newsId) return res.status(400).end("Invalid input");
     News.findOneAndUpdate({newsId: req.params.newsId}, {$set: req.body}, {new: true}, (err, news)=>{
         if (err) throw err;
@@ -51,7 +51,7 @@ routerNews.post('/news/updateNew/:newsId', upload, function (req, res, next) {
 
 
 
-routerNews.delete('/news/delete/:newsId', function (req, res) {
+routerNews.delete('/deleteNews/:newsId', function (req, res) {
     if (!req.params.newsId || req.params.newsId===null) return res.status(400).end("Invalid input");
     News.findOneAndRemove({newsId: req.params.newsId}, function (err, news) {
         if (err) throw err;

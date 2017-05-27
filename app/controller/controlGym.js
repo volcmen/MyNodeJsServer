@@ -38,6 +38,7 @@ module.exports.updateGym = function (req, res) {
 module.exports.deleteGym = function (req, res) {
     Gym.findOneAndRemove({id : req.params.id}, function (err, gym){
         if (err) throw err;
+        if (!gym) return res.status(409).send('No such gym with id: ' + req.params.id);
         res.status(200).end('Gym deleted with id: ' + gym.id);
     })
 };
