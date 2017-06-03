@@ -6,11 +6,11 @@ const gymSchema = new Schema({
     id: {type: String, unique: true, required: true},
     address: String,
     photo: {type: String, default: null},
-    users: [],
+    users: Array,
     gymsDiscription: String,
     workingTime: String,
     ourHistory: String,
-    clients: []
+    clients: Array,
 });
 
 gymSchema.methods.addUsers = function (users) {

@@ -25,7 +25,7 @@ const clientSchema = new Schema({
         status: String,
         photo: {type: String, default: null},
         coach: String,
-        programs: String,
+        programs: Array,
         abonnement: {
             id: String,
             status: Boolean,

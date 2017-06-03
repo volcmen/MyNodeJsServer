@@ -28,15 +28,34 @@ routerNews.get('/news', function (req, res) {
 
 
 routerNews.post('/addNews', upload, function (req, res, next) {
-    if (!req.body.newsId) return res.status(400).end("Invalid input");
-    News.findOne({newsId: req.body.newsId}, function (err, news) {
-            if (err) throw err;
-            if (news) return res.status(409).end("News Id already exists");
-            News.collection.insert(req.body, (err)).then((data)=>{
-                if(err) throw err;
-                res.status(201).json(data);
+    let reqBody = req.body;
+    let found = false;
+    if (Array.isArray(reqBody))
+        for (let i = 0; i < reqBody.length; i++) {
+            News.findOne({newsId: reqBody[i].newsId}, function (err, news) {
+                if (err) throw err;
+                if (news) {
+                    found = true;
+                    return res.status(400).end("There is already news with newsId: " + news.newsId);
+                }
+                else {
+                    News.collection.insert(req.body[i], (err)).then((data) => {
+                        if (err) throw err;
+                        res.status(201).send(JSON.stringify(data));
+                    })
+                }
+            });
+        }
+    else News.findOne({newsId: req.body.newsId}, function (err, news) {
+        if (err) throw err;
+        if (news) return res.status(400).end("There is already news with newsId: " + news.newsId);
+        else {
+            News.collection.insert(req.body, (err)).then((data) => {
+                if (err) throw err;
+                res.status(201).send(JSON.stringify(data));
             })
-        })
+        }
+    })
 });
 
 

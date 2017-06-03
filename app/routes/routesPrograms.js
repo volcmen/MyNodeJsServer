@@ -14,6 +14,8 @@ routerPrograms.post('/createProgram', programs.createProgram);
 
 routerPrograms.post('/updatePrograms/:id', programs.updateProgram);
 
+routerPrograms.get('/getProgramsOfClient/:id', programs.getProgramsOfClient);
+
 routerPrograms.delete('/deletePrograms/:id', programs.deleteProgram);
 
 module.exports = routerPrograms;

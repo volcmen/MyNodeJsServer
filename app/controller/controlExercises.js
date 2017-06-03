@@ -13,12 +13,30 @@ module.exports.getAllExercises = function (req, res) {
 };
 
 module.exports.createExercises = function (req, res) {
-    Exercises.findOne({name: req.body.name}, function (err, exercise) {
+    let reqBody = req.body;
+    let found = false;
+    if (Array.isArray(reqBody))
+    for (let i=0; i<reqBody.length; i++) {
+        Exercises.findOne({name: reqBody[i].name}, function (err, exercise) {
+            if (err) throw err;
+            if (exercise) {
+                found=true;
+                return res.status(400).end("There is already exercise with name: " + exercise.name);
+            }
+            else {
+                Exercises.collection.insert(req.body[i], (err)).then((data) => {
+                    if (err) throw err;
+                    res.status(201).send(JSON.stringify(data));
+                })
+            }
+        })
+    }
+    else Exercises.findOne({name: req.body.name}, function (err, exercise) {
         if (err) throw err;
         if (exercise) return res.status(400).end("There is already exercise with name: " + exercise.name);
         else {
-            Exercises.collection.insert(req.body, (err)).then((data)=>{
-                if(err) throw err;
+            Exercises.collection.insert(req.body, (err)).then((data) => {
+                if (err) throw err;
                 res.status(201).send(JSON.stringify(data));
             })
         }

@@ -1,4 +1,5 @@
 const Programs = require('../models/programs');
+const Client = require('../models/client');
 
 module.exports = {};
 
@@ -34,6 +35,15 @@ module.exports.updateProgram = (req, res) =>{
         if (err) throw err;
         if (!prog) return res.status(409).send('No such program with programID: ' + req.params.id);
         res.status(200).end('Program updated with programID: ' + prog.programID);
+    })
+};
+
+module.exports.getProgramsOfClient = (req, res) =>{
+    if (!req.params.id) return res.status(400).end("Invalid input");
+    Client.findOne({_id: req.params.id}, (err, client)=>{
+        if (err) throw err;
+        if (!client) return res.status(409).send('No such Client with id: ' + req.params.id);
+        res.status(200).end('Clint have programs: ' + JSON.stringify(client.profile.programs));
     })
 };
 

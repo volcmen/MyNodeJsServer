@@ -7,7 +7,7 @@ const progSchema = new Schema({
     user: String,
     client: String,
     programName: String,
-    exercises: String,
+    exercises: Array,
     programType: String
 });
 
