@@ -1,11 +1,16 @@
 # MyNodeJsServer
 
-add you mongodb in app/config/config.json
 
-all routes in app/routes
+This is my first Node.js server.
+May contain bugs and ugly code. 
 
+### Please do not judge strictly.
 
+All routes in `app/routes`
 
-to start server - npm install, after  node server.js
-
-
+To Start:
+```
+1. yarn install
+2. Connect your mongodb in app/config/config.json
+3. yarn start.
+```
